@@ -1,0 +1,15 @@
+{
+  "session.key" : "put.a.name.here",
+  "environment" : "development",
+  "port.development" : ":4200",
+  "session.development.authenticationKey" : "generate one with 'openssl rand -base64 32'",
+  "session.development.encryptionKey" : "generate one with 'openssl rand -base64 16'",
+  "session.development.domain" : "localhost",
+  "session.development.maxAge" : 3600,
+  "backblaze.rootUrl" : "https://api.backblazeb2.com",
+  "backblaze.s3.endpoint" : "https://s3.eu-central-003.backblazeb2.com",
+  "backblaze.keyID" : "...",
+  "backblaze.applicationKey" : "...",
+  "backblaze.token" : "",
+  "FileServerURL" : "http://file.server.url"
+}
