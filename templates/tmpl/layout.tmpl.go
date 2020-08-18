@@ -54,7 +54,7 @@ const LayoutHTML = `
       <footer>
         <div class="links">
           <div>
-            No tracking. No bloat. <a href="https://github.com/danskeren/imgasm.com" target="_blank">Open Source</a>.
+            No tracking. No bloat. <a href="https://github.com/tullo/imgasm.com" target="_blank">Open Source</a>.
           </div>
           <div>
             <a href="/protect-your-privacy">Protect Your Privacy</a>
@@ -77,4 +77,4 @@ const LayoutHTML = `
   </div>
 </body> 
 </html>
-` 
+`

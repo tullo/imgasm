@@ -1,4 +1,4 @@
-module github.com/danskeren/imgasm.com
+module github.com/tullo/imgasm.com
 
 go 1.15
 
@@ -7,7 +7,6 @@ require (
 	github.com/danskeren/database v0.0.0-20190903083841-f982b320b503
 	github.com/dgraph-io/badger v1.6.0
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
-	github.com/gabriel-vasile/mimetype v1.1.1
 	github.com/go-chi/chi v4.1.2+incompatible
 	github.com/go-chi/cors v1.1.1
 	github.com/gorilla/csrf v1.6.1

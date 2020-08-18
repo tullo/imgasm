@@ -25,10 +25,10 @@ const AboutHTML = `
     I want to avoid being forced to shut down, which is why the website will initially focus exclusively on images with a relatively low size limit, and with no durability promises. I believe that good code, along with smart hosting, storage and cacheing will allow me to handle millions of users with ease, while serving images at a speed that's faster than the competitors regardless of your location.
   </p>
   <p>
-    I hope to cover the hosting costs, and perhaps even be profitable, through <a href="https://github.com/danskeren">GitHub Donations</a>, as well as hardcoded promotions that will appear in the header and footer. These promotions will not involve any user tracking.
+    I hope to cover the hosting costs, and perhaps even be profitable, through <a href="https://github.com/tullo">GitHub Donations</a>, as well as hardcoded promotions that will appear in the header and footer. These promotions will not involve any user tracking.
   </p>
   <p>
-    If you wish to support me, then I would appreciate if you share the website, <a href="https://github.com/danskeren/imgasm.com">star imgasm on GitHub</a> (as well as my other projects), and donate.
+    If you wish to support me, then I would appreciate if you share the website, <a href="https://github.com/tullo/imgasm.com">star imgasm on GitHub</a> (as well as my other projects), and donate.
   </p>
   <p>
     With enough support then I will increase the size limit, and add support for video files, since Reddit Videos and Gfycat are also evil.

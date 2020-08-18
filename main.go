@@ -6,11 +6,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/danskeren/imgasm.com/file"
-	"github.com/danskeren/imgasm.com/templates"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/packago/config"
+	"github.com/tullo/imgasm.com/file"
+	"github.com/tullo/imgasm.com/templates"
 	limiter "github.com/ulule/limiter/v3"
 	"github.com/ulule/limiter/v3/drivers/middleware/stdlib"
 	"github.com/ulule/limiter/v3/drivers/store/memory"
