@@ -22,7 +22,8 @@ import (
 
 const maxFileSize int64 = 1024 * 1024 * 10 // 10 MB
 
-func FileGET(w http.ResponseWriter, r *http.Request) {
+// Retrieve knows how to load a file from the backblaze cloud storrage.
+func Retrieve(w http.ResponseWriter, r *http.Request) {
 	sess, _ := cookie.GetSession(r, config.File().GetString("session.key"))
 	commonData := templates.ReadCommonData(w, r)
 	fileDataBytes, err := db.BadgerDB.Get([]byte(chi.URLParam(r, "fileid")))
@@ -52,7 +53,8 @@ func FileGET(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func UploadPOST(w http.ResponseWriter, r *http.Request) {
+// Upload knows how to save a file to the backblaze cloud storrage.
+func Upload(w http.ResponseWriter, r *http.Request) {
 	r.Body = http.MaxBytesReader(w, r.Body, maxFileSize)
 	file, _, err := r.FormFile("file")
 	if err != nil {

@@ -48,7 +48,7 @@ func main() {
 		r.Get("/protect-your-privacy", privacy)
 		r.Get("/privacy-policy", policy)
 		r.NotFound(notFound)
-		r.Get("/{fileid}", file.FileGET)
+		r.Get("/{fileid}", file.Retrieve)
 	})
 
 	uploadStore := memory.NewStore()
@@ -60,7 +60,7 @@ func main() {
 	uploadLimiterMiddleware.OnLimitReached = rateLimit
 	r.Group(func(r chi.Router) {
 		r.Use(uploadLimiterMiddleware.Handler)
-		r.Post("/", file.UploadPOST)
+		r.Post("/", file.Upload)
 	})
 
 	currentDir, err := os.Getwd()
