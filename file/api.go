@@ -33,10 +33,10 @@ func FileGET(w http.ResponseWriter, r *http.Request) {
 				"Common": commonData,
 			})
 			return
-		} else {
-			sess.AddFlash(err.Error())
-			sess.Save(r, w)
 		}
+		sess.AddFlash(err.Error())
+		sess.Save(r, w)
+
 	}
 	var fileData models.FileData
 	if err = json.Unmarshal(fileDataBytes, &fileData); err != nil {
