@@ -13,12 +13,6 @@ import (
 	"github.com/packago/config"
 )
 
-type UploadURL struct {
-	AuthorizationToken string `json:"authorizationToken"`
-	BucketID           string `json:"bucketId"`
-	UploadURL          string `json:"uploadUrl"`
-}
-
 // Upload a file to a bucket in backblaze cloude storrage.
 func Upload(file models.File) error {
 	acc, err := authorizeAccount()
