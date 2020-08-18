@@ -8,7 +8,8 @@ import (
 	"github.com/packago/config"
 )
 
-type AuthorizeAccount struct {
+// Account holds backblaze specific data.
+type Account struct {
 	AbsoluteMinimumPartSize int    `json:"absoluteMinimumPartSize"`
 	AccountID               string `json:"accountId"`
 	Allowed                 struct {
@@ -23,20 +24,22 @@ type AuthorizeAccount struct {
 	RecommendedPartSize int    `json:"recommendedPartSize"`
 }
 
-func B2AuthorizeAccount() (AuthorizeAccount, error) {
-	var authorizeAccount AuthorizeAccount
+// authorizeAccount retrieves backblaze account data connected to a
+// configured keyID and applicationKey
+func authorizeAccount() (Account, error) {
+	var a Account
 	req, err := http.NewRequest("GET", fmt.Sprintf("%s/b2api/v2/b2_authorize_account", config.File().GetString("backblaze.rootUrl")), nil)
 	if err != nil {
-		return authorizeAccount, err
+		return a, err
 	}
 	req.SetBasicAuth(config.File().GetString("backblaze.keyID"), config.File().GetString("backblaze.applicationKey"))
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
-		return authorizeAccount, err
+		return a, err
 	}
 	defer resp.Body.Close()
-	if err = json.NewDecoder(resp.Body).Decode(&authorizeAccount); err != nil {
-		return authorizeAccount, err
+	if err = json.NewDecoder(resp.Body).Decode(&a); err != nil {
+		return a, err
 	}
-	return authorizeAccount, nil
+	return a, nil
 }
