@@ -16,8 +16,10 @@ import (
 	"github.com/ulule/limiter/v3/drivers/store/memory"
 )
 
-const ViewLimit = "150-H"
-const UploadLimit = "100-D"
+const (
+	viewLimit   = "150-H"
+	uploadLimit = "100-D"
+)
 
 func main() {
 	r := chi.NewRouter()
@@ -32,30 +34,30 @@ func main() {
 	r.Use(cors.Handler)
 
 	viewStore := memory.NewStore()
-	viewRate, err := limiter.NewRateFromFormatted(ViewLimit)
+	viewRate, err := limiter.NewRateFromFormatted(viewLimit)
 	if err != nil {
 		panic(err)
 	}
 	viewLimiterMiddleware := stdlib.NewMiddleware(limiter.New(viewStore, viewRate, limiter.WithTrustForwardHeader(true)))
-	viewLimiterMiddleware.OnLimitReached = rateLimitGET
+	viewLimiterMiddleware.OnLimitReached = rateLimit
 
 	r.Group(func(r chi.Router) {
 		r.Use(viewLimiterMiddleware.Handler)
-		r.Get("/", indexGET)
-		// r.Get("/about", aboutGET)
-		r.Get("/protect-your-privacy", protectYourPrivacyGET)
-		r.Get("/privacy-policy", privacyPolicyGET)
-		r.NotFound(notFoundGET)
+		r.Get("/", index)
+		// r.Get("/about", about)
+		r.Get("/protect-your-privacy", privacy)
+		r.Get("/privacy-policy", policy)
+		r.NotFound(notFound)
 		r.Get("/{fileid}", file.FileGET)
 	})
 
 	uploadStore := memory.NewStore()
-	uploadRate, err := limiter.NewRateFromFormatted(UploadLimit)
+	uploadRate, err := limiter.NewRateFromFormatted(uploadLimit)
 	if err != nil {
 		panic(err)
 	}
 	uploadLimiterMiddleware := stdlib.NewMiddleware(limiter.New(uploadStore, uploadRate, limiter.WithTrustForwardHeader(true)))
-	uploadLimiterMiddleware.OnLimitReached = rateLimitGET
+	uploadLimiterMiddleware.OnLimitReached = rateLimit
 	r.Group(func(r chi.Router) {
 		r.Use(uploadLimiterMiddleware.Handler)
 		r.Post("/", file.UploadPOST)
@@ -66,7 +68,7 @@ func main() {
 		panic(err)
 	}
 	filesDir := filepath.Join(currentDir, "static")
-	FileServer(r, "/static", http.Dir(filesDir))
+	fileServer(r, "/static", http.Dir(filesDir))
 
 	switch config.File().GetString("environment") {
 	case "development":
@@ -78,7 +80,7 @@ func main() {
 	}
 }
 
-func FileServer(r chi.Router, path string, root http.FileSystem) {
+func fileServer(r chi.Router, path string, root http.FileSystem) {
 	if strings.ContainsAny(path, "{}*") {
 		panic("FileServer does not permit URL parameters.")
 	}
@@ -93,7 +95,7 @@ func FileServer(r chi.Router, path string, root http.FileSystem) {
 	}))
 }
 
-func notFoundGET(w http.ResponseWriter, r *http.Request) {
+func notFound(w http.ResponseWriter, r *http.Request) {
 	commonData := templates.ReadCommonData(w, r)
 	commonData.MetaTitle = "404"
 	templates.Render(w, "not-found.html", map[string]interface{}{
@@ -101,14 +103,14 @@ func notFoundGET(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func indexGET(w http.ResponseWriter, r *http.Request) {
+func index(w http.ResponseWriter, r *http.Request) {
 	commonData := templates.ReadCommonData(w, r)
 	templates.Render(w, "index.html", map[string]interface{}{
 		"Common": commonData,
 	})
 }
 
-func aboutGET(w http.ResponseWriter, r *http.Request) {
+func about(w http.ResponseWriter, r *http.Request) {
 	commonData := templates.ReadCommonData(w, r)
 	commonData.MetaTitle = "About"
 	templates.Render(w, "about.html", map[string]interface{}{
@@ -116,7 +118,7 @@ func aboutGET(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func protectYourPrivacyGET(w http.ResponseWriter, r *http.Request) {
+func privacy(w http.ResponseWriter, r *http.Request) {
 	commonData := templates.ReadCommonData(w, r)
 	commonData.MetaTitle = "Protect Your Privacy"
 	templates.Render(w, "protect-your-privacy.html", map[string]interface{}{
@@ -124,7 +126,7 @@ func protectYourPrivacyGET(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func privacyPolicyGET(w http.ResponseWriter, r *http.Request) {
+func policy(w http.ResponseWriter, r *http.Request) {
 	commonData := templates.ReadCommonData(w, r)
 	commonData.MetaTitle = "Privacy Policy"
 	templates.Render(w, "privacy-policy.html", map[string]interface{}{
@@ -132,12 +134,12 @@ func privacyPolicyGET(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func rateLimitGET(w http.ResponseWriter, r *http.Request) {
+func rateLimit(w http.ResponseWriter, r *http.Request) {
 	commonData := templates.ReadCommonData(w, r)
 	commonData.MetaTitle = "Rate limit reached"
 	templates.Render(w, "rate-limit.html", map[string]interface{}{
 		"Common":      commonData,
-		"UploadLimit": strings.Replace(UploadLimit, "-D", "", -1),
-		"ViewLimit":   strings.Replace(ViewLimit, "-H", "", -1),
+		"UploadLimit": strings.Replace(uploadLimit, "-D", "", -1),
+		"ViewLimit":   strings.Replace(viewLimit, "-H", "", -1),
 	})
 }

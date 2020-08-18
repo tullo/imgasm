@@ -20,7 +20,7 @@ import (
 	"github.com/packago/cookie"
 )
 
-const MaxFileSize int64 = 1024 * 1024 * 10 // 10 MB
+const maxFileSize int64 = 1024 * 1024 * 10 // 10 MB
 
 func FileGET(w http.ResponseWriter, r *http.Request) {
 	sess, _ := cookie.GetSession(r, config.File().GetString("session.key"))
@@ -50,7 +50,7 @@ func FileGET(w http.ResponseWriter, r *http.Request) {
 }
 
 func UploadPOST(w http.ResponseWriter, r *http.Request) {
-	r.Body = http.MaxBytesReader(w, r.Body, MaxFileSize)
+	r.Body = http.MaxBytesReader(w, r.Body, maxFileSize)
 	file, _, err := r.FormFile("file")
 	if err != nil {
 		if err == http.ErrMissingFile {
@@ -63,7 +63,7 @@ func UploadPOST(w http.ResponseWriter, r *http.Request) {
 
 	buf, err := ioutil.ReadAll(file)
 	if len(buf) == 0 {
-		renderTemplateWithError(w, r, errors.New("Trouble reading file, empty body."), "index.html")
+		renderTemplateWithError(w, r, errors.New("trouble reading file, empty body"), "index.html")
 		return
 	}
 
@@ -142,7 +142,7 @@ func UploadPOST(w http.ResponseWriter, r *http.Request) {
 		MimeType:  kind.MIME.Value,
 		Extension: kind.Extension,
 	}
-	if err = backblaze.B2Upload(image); err != nil {
+	if err = backblaze.Upload(image); err != nil {
 		renderTemplateWithError(w, r, err, "index.html")
 		return
 	}
