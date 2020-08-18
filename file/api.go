@@ -43,9 +43,12 @@ func FileGET(w http.ResponseWriter, r *http.Request) {
 		sess.AddFlash(err.Error())
 		sess.Save(r, w)
 	}
+
+	fileServerURL := config.File().GetString("FileServerURL")
 	templates.Render(w, "file.html", map[string]interface{}{
-		"Common":   commonData,
-		"Filename": fileData.Filename,
+		"Common":        commonData,
+		"Filename":      fileData.Filename,
+		"FileServerURL": fileServerURL,
 	})
 }
 
