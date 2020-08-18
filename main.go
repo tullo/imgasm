@@ -11,7 +11,7 @@ import (
 	"github.com/packago/config"
 	"github.com/tullo/imgasm.com/file"
 	"github.com/tullo/imgasm.com/templates"
-	limiter "github.com/ulule/limiter/v3"
+	"github.com/ulule/limiter/v3"
 	"github.com/ulule/limiter/v3/drivers/middleware/stdlib"
 	"github.com/ulule/limiter/v3/drivers/store/memory"
 )
@@ -34,15 +34,15 @@ func main() {
 	r.Use(cors.Handler)
 
 	viewStore := memory.NewStore()
-	viewRate, err := limiter.NewRateFromFormatted(viewLimit)
+	rate, err := limiter.NewRateFromFormatted(viewLimit)
 	if err != nil {
 		panic(err)
 	}
-	viewLimiterMiddleware := stdlib.NewMiddleware(limiter.New(viewStore, viewRate, limiter.WithTrustForwardHeader(true)))
-	viewLimiterMiddleware.OnLimitReached = rateLimit
+	view := stdlib.NewMiddleware(limiter.New(viewStore, rate, limiter.WithTrustForwardHeader(true)))
+	view.OnLimitReached = rateLimitHandler
 
 	r.Group(func(r chi.Router) {
-		r.Use(viewLimiterMiddleware.Handler)
+		r.Use(view.Handler)
 		r.Get("/", index)
 		// r.Get("/about", about)
 		r.Get("/protect-your-privacy", privacy)
@@ -51,15 +51,15 @@ func main() {
 		r.Get("/{fileid}", file.Retrieve)
 	})
 
-	uploadStore := memory.NewStore()
-	uploadRate, err := limiter.NewRateFromFormatted(uploadLimit)
+	us := memory.NewStore()
+	ur, err := limiter.NewRateFromFormatted(uploadLimit)
 	if err != nil {
 		panic(err)
 	}
-	uploadLimiterMiddleware := stdlib.NewMiddleware(limiter.New(uploadStore, uploadRate, limiter.WithTrustForwardHeader(true)))
-	uploadLimiterMiddleware.OnLimitReached = rateLimit
+	upload := stdlib.NewMiddleware(limiter.New(us, ur, limiter.WithTrustForwardHeader(true)))
+	upload.OnLimitReached = rateLimitHandler
 	r.Group(func(r chi.Router) {
-		r.Use(uploadLimiterMiddleware.Handler)
+		r.Use(upload.Handler)
 		r.Post("/", file.Upload)
 	})
 
@@ -134,7 +134,7 @@ func policy(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func rateLimit(w http.ResponseWriter, r *http.Request) {
+func rateLimitHandler(w http.ResponseWriter, r *http.Request) {
 	commonData := templates.ReadCommonData(w, r)
 	commonData.MetaTitle = "Rate limit reached"
 	templates.Render(w, "rate-limit.html", map[string]interface{}{
