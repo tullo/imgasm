@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"fmt"
+	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
@@ -14,7 +15,7 @@ import (
 )
 
 // Upload a file to a bucket in backblaze cloude storrage.
-func Upload(file models.File) error {
+func Upload(log *log.Logger, file models.File) error {
 	acc, err := authorizeAccount()
 	if err != nil {
 		return fmt.Errorf("failed to authorize %v", err)
@@ -47,6 +48,6 @@ func Upload(file models.File) error {
 	if err != nil {
 		return fmt.Errorf("failed to upload object %s/%s, %v", acc.Allowed.BucketName, *key, err)
 	}
-	fmt.Printf("Successfully uploaded file: %s\n", *key)
+	log.Printf("Successfully uploaded file: %s\n", *key)
 	return nil
 }

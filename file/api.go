@@ -6,7 +6,9 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/dgraph-io/badger"
 	"github.com/go-chi/chi"
@@ -22,8 +24,19 @@ import (
 
 const maxFileSize int64 = 1024 * 1024 * 10 // 10 MB
 
+type File struct {
+	log *log.Logger
+}
+
+func New() *File {
+	f := File{
+		log: log.New(os.Stdout, "IMGASM : ", log.LstdFlags|log.Lmicroseconds|log.Lshortfile),
+	}
+	return &f
+}
+
 // Retrieve knows how to load a file from the backblaze cloud storrage.
-func Retrieve(w http.ResponseWriter, r *http.Request) {
+func (File) Retrieve(w http.ResponseWriter, r *http.Request) {
 	sess, _ := cookie.GetSession(r, config.File().GetString("session.key"))
 	commonData := templates.ReadCommonData(w, r)
 	fileDataBytes, err := db.BadgerDB.Get([]byte(chi.URLParam(r, "fileid")))
@@ -54,7 +67,7 @@ func Retrieve(w http.ResponseWriter, r *http.Request) {
 }
 
 // Upload knows how to save a file to the backblaze cloud storrage.
-func Upload(w http.ResponseWriter, r *http.Request) {
+func (f File) Upload(w http.ResponseWriter, r *http.Request) {
 	r.Body = http.MaxBytesReader(w, r.Body, maxFileSize)
 	file, _, err := r.FormFile("file")
 	if err != nil {
@@ -91,8 +104,8 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 			renderTemplateWithError(w, r, err, "index.html")
 			return
 		}
-		fmt.Println("original:", originalMD5)
-		fmt.Println("processed:", fileMD5.Processed)
+		f.log.Println("original:", originalMD5)
+		f.log.Println("processed:", fileMD5.Processed)
 		if originalMD5 != fileMD5.Processed {
 			if savedMD5Bytes, err := db.BadgerDB.Get([]byte(fileMD5.Processed)); err != badger.ErrKeyNotFound {
 				if err = json.Unmarshal(savedMD5Bytes, &fileMD5); err != nil {
@@ -147,7 +160,7 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		MimeType:  kind.MIME.Value,
 		Extension: kind.Extension,
 	}
-	if err = backblaze.Upload(image); err != nil {
+	if err = backblaze.Upload(f.log, image); err != nil {
 		renderTemplateWithError(w, r, err, "index.html")
 		return
 	}

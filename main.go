@@ -41,6 +41,8 @@ func main() {
 	view := stdlib.NewMiddleware(limiter.New(viewStore, rate, limiter.WithTrustForwardHeader(true)))
 	view.OnLimitReached = rateLimitHandler
 
+	file := file.New()
+
 	r.Group(func(r chi.Router) {
 		r.Use(view.Handler)
 		r.Get("/", index)
