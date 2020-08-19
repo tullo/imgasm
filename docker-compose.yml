@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  imgasm:
+    image: imgasm:1.0.0
+    build:
+      context: .
+    ports:
+    - 4200:4200
+    volumes:
+      - ./config.json:/app/config.json:ro
