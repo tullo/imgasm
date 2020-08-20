@@ -5,6 +5,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+	"strings"
 
 	"github.com/packago/config"
 	"github.com/tdewolff/minify"
@@ -59,19 +60,21 @@ func minifyHTML(input string) string {
 
 func minifyCSS() {
 	filepaths := []string{"./static/css/main.css"}
-
-	min := minify.New()
-	min.AddFunc("text/css", css.Minify)
-	var minifiedCSS string
+	m := minify.New()
+	m.AddFunc("text/css", css.Minify)
+	var sb strings.Builder
 	for _, filepath := range filepaths {
-		unminifiedCSS, err := ioutil.ReadFile(filepath)
-		minCSS, err := min.String("text/css", string(unminifiedCSS))
+		css, err := ioutil.ReadFile(filepath)
 		if err != nil {
 			panic(err)
 		}
-		minifiedCSS += minCSS
+		min, err := m.String("text/css", string(css))
+		if err != nil {
+			panic(err)
+		}
+		sb.WriteString(min)
 	}
-	err := ioutil.WriteFile("./static/main.min.css", []byte(minifiedCSS), 0644)
+	err := ioutil.WriteFile("./static/main.min.css", []byte(sb.String()), 0644)
 	if err != nil {
 		panic(err)
 	}

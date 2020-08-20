@@ -72,7 +72,7 @@ func (f File) Upload(w http.ResponseWriter, r *http.Request) {
 	file, _, err := r.FormFile("file")
 	if err != nil {
 		if err == http.ErrMissingFile {
-			err = errors.New("Remember to select a file to upload")
+			err = errors.New("remember to select a file to upload")
 		}
 		renderTemplateWithError(w, r, err, "index.html")
 		return
@@ -80,6 +80,7 @@ func (f File) Upload(w http.ResponseWriter, r *http.Request) {
 	defer file.Close()
 
 	buf, err := ioutil.ReadAll(file)
+	f.log.Println("trouble reading file:", err)
 	if len(buf) == 0 {
 		renderTemplateWithError(w, r, errors.New("trouble reading file, empty body"), "index.html")
 		return
@@ -92,7 +93,7 @@ func (f File) Upload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if !filetype.IsImage(buf) {
-		renderTemplateWithError(w, r, errors.New("This filetype is currently not supported"), "index.html")
+		renderTemplateWithError(w, r, errors.New("this filetype is currently not supported"), "index.html")
 		return
 	}
 

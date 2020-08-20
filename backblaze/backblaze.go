@@ -36,9 +36,11 @@ func Upload(log *log.Logger, file models.File) error {
 		Region:           aws.String("eu-central-003"),
 		S3ForcePathStyle: aws.Bool(true),
 	}
-	newSession := session.New(s3Config)
-	s3Client := s3.New(newSession)
-	_, err = s3Client.PutObject(&s3.PutObjectInput{
+	s, err := session.NewSession(s3Config)
+	if err != nil {
+		return fmt.Errorf("failed to upload object %s/%s, %v", acc.Allowed.BucketName, *key, err)
+	}
+	_, err = s3.New(s).PutObject(&s3.PutObjectInput{
 		Body:        bytes.NewReader(file.Body),
 		Bucket:      &acc.Allowed.BucketName,
 		Key:         key,
