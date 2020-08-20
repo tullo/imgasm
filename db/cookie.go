@@ -1,8 +1,10 @@
 package db
 
 import (
+	"net/http"
+
 	"github.com/packago/config"
-	"github.com/packago/cookie"
+	"github.com/tullo/cookie"
 )
 
 func init() {
@@ -20,6 +22,7 @@ func NewCookie() {
 			Path:              "/",
 			MaxAge:            config.File().GetInt("session.development.maxAge"),
 			Secure:            false,
+			SameSite:          http.SameSiteStrictMode,
 		}
 	case "production":
 		opts = cookie.CookieOptions{
@@ -29,6 +32,7 @@ func NewCookie() {
 			Path:              "/",
 			MaxAge:            config.File().GetInt("session.production.maxAge"),
 			Secure:            true,
+			SameSite:          http.SameSiteStrictMode,
 		}
 	default:
 		panic("./config.json environment not set to development or production")

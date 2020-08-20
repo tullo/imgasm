@@ -14,7 +14,6 @@ require (
 	github.com/h2non/filetype v1.0.10
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
 	github.com/packago/config v0.0.0-20190627203747-861250ba6cac
-	github.com/packago/cookie v0.0.0-20190627203510-70e29fbb2a1f
 	github.com/packago/generate v0.0.0-20190627204322-bb70f0056f92
 	github.com/pelletier/go-toml v1.8.0 // indirect
 	github.com/spf13/afero v1.3.4 // indirect
@@ -25,6 +24,7 @@ require (
 	github.com/tdewolff/minify v2.3.6+incompatible
 	github.com/tdewolff/parse v2.3.4+incompatible // indirect
 	github.com/tdewolff/test v1.0.3 // indirect
+	github.com/tullo/cookie v1.0.0
 	github.com/ulule/limiter/v3 v3.5.0
 	golang.org/x/sys v0.0.0-20200814200057-3d37ad5750ed // indirect
 	gopkg.in/ini.v1 v1.60.0 // indirect

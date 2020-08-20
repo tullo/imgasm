@@ -15,7 +15,7 @@ import (
 	"github.com/h2non/bimg"
 	"github.com/h2non/filetype"
 	"github.com/packago/config"
-	"github.com/packago/cookie"
+	"github.com/tullo/cookie"
 	"github.com/tullo/imgasm.com/backblaze"
 	"github.com/tullo/imgasm.com/db"
 	"github.com/tullo/imgasm.com/models"
