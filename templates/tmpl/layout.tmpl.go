@@ -56,9 +56,6 @@ const LayoutHTML = `
             No tracking. No bloat. <a href="https://github.com/tullo/imgasm.com" target="_blank">Open Source</a>.
           </div>
           <div>
-            <a href="/protect-your-privacy">Protect Your Privacy</a>
-          </div>
-          <div>
             <a href="/privacy-policy">Privacy Policy</a>
           </div>
         </div>

@@ -47,7 +47,6 @@ func main() {
 		r.Use(view.Handler)
 		r.Get("/", index)
 		// r.Get("/about", about)
-		r.Get("/protect-your-privacy", privacy)
 		r.Get("/privacy-policy", policy)
 		r.NotFound(notFound)
 		r.Get("/{fileid}", file.Retrieve)
@@ -116,14 +115,6 @@ func about(w http.ResponseWriter, r *http.Request) {
 	commonData := templates.ReadCommonData(w, r)
 	commonData.MetaTitle = "About"
 	templates.Render(w, "about.html", map[string]interface{}{
-		"Common": commonData,
-	})
-}
-
-func privacy(w http.ResponseWriter, r *http.Request) {
-	commonData := templates.ReadCommonData(w, r)
-	commonData.MetaTitle = "Protect Your Privacy"
-	templates.Render(w, "protect-your-privacy.html", map[string]interface{}{
 		"Common": commonData,
 	})
 }
