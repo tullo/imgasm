@@ -206,10 +206,10 @@ github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.10.1/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/gomega v1.7.0/go.mod h1:ex+gbHU/CVuBBDIJjb2X0qEXbFg53c61hWP/1CpauHY=
-github.com/packago/config v0.0.0-20190627203747-861250ba6cac h1:jGxgfjXKS0QgZK1MSlTjF0azqEmUpUfFvoOpLONAij4=
-github.com/packago/config v0.0.0-20190627203747-861250ba6cac/go.mod h1:HA4DJ98XeMQ65uqdhHpgZxgvieTFRfq867K0755T/w0=
-github.com/packago/generate v0.0.0-20190627204322-bb70f0056f92 h1:Og7Y4Ha98XkcguhIAtC9IgTGaiqxE+o99jqYGXXueC0=
-github.com/packago/generate v0.0.0-20190627204322-bb70f0056f92/go.mod h1:NYBMF1Wf4Tg0T4GJ3vdJIVMmK7hkvyhA+Va9f0zUbDE=
+github.com/packago/config v0.0.0-20190627203747-0671c1441167 h1:aZWk255Jtpk8joSxSDYLM6kK672r8TGnKRkpi0GbFus=
+github.com/packago/config v0.0.0-20190627203747-0671c1441167/go.mod h1:HA4DJ98XeMQ65uqdhHpgZxgvieTFRfq867K0755T/w0=
+github.com/packago/generate v0.0.0-20190627204322-648e91a704c7 h1:UYSpwd6EGSQZCjuH05E13OfaTlXjNNEPK4Q9HCT2yJA=
+github.com/packago/generate v0.0.0-20190627204322-648e91a704c7/go.mod h1:NYBMF1Wf4Tg0T4GJ3vdJIVMmK7hkvyhA+Va9f0zUbDE=
 github.com/pascaldekloe/goe v0.0.0-20180627143212-57f6aae5913c/go.mod h1:lzWF7FIEvWOWxwDKqyGYQf6ZUaNfKdP144TG7ZOy1lc=
 github.com/patrickmn/go-cache v2.1.0+incompatible/go.mod h1:3Qf8kWWT7OJRJbdiICTKqZju1ZixQ/KpMGzzAfe6+WQ=
 github.com/pelletier/go-toml v1.2.0 h1:T5zMGML61Wp+FlcbWjRDT7yAxhJNAiPPLOFECq181zc=

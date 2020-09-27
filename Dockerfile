@@ -1,8 +1,9 @@
-FROM golang:1.15-alpine3.12 AS go-builder
+FROM golang:1.15.2-alpine3.12 AS go-builder
+ENV CGO_ENABLED 1
 RUN apk --no-cache add gcc musl-dev vips-dev
-ADD . /build/
+COPY . /build/
 WORKDIR /build
-RUN CGO_ENABLED=1 GOOS=linux go build -o main
+RUN go build -o main
 
 
 FROM alpine:3.12

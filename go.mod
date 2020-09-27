@@ -13,8 +13,8 @@ require (
 	github.com/h2non/bimg v1.0.19
 	github.com/h2non/filetype v1.0.10
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
-	github.com/packago/config v0.0.0-20190627203747-861250ba6cac
-	github.com/packago/generate v0.0.0-20190627204322-bb70f0056f92
+	github.com/packago/config v0.0.0-20190627203747-0671c1441167
+	github.com/packago/generate v0.0.0-20190627204322-648e91a704c7
 	github.com/pelletier/go-toml v1.8.0 // indirect
 	github.com/spf13/afero v1.3.4 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
