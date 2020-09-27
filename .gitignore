@@ -1,5 +1,5 @@
 imgasm.com
-static/main.min.css
+ui/static/main.min.css
 gin-bin
 config.json
 badger.db

@@ -57,7 +57,7 @@ func minifyHTML(input string) string {
 }
 
 func minifyCSS() {
-	filepaths := []string{"./static/css/main.css"}
+	filepaths := []string{"./ui/static/css/main.css"}
 	m := minify.New()
 	m.AddFunc("text/css", css.Minify)
 	var sb strings.Builder
@@ -72,7 +72,7 @@ func minifyCSS() {
 		}
 		sb.WriteString(min)
 	}
-	err := ioutil.WriteFile("./static/main.min.css", []byte(sb.String()), 0644)
+	err := ioutil.WriteFile("./ui/static/main.min.css", []byte(sb.String()), 0644)
 	if err != nil {
 		panic(err)
 	}

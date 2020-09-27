@@ -68,7 +68,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	filesDir := filepath.Join(currentDir, "static")
+	filesDir := filepath.Join(currentDir, "ui/static")
 	fileServer(r, "/static", http.Dir(filesDir))
 
 	switch config.File().GetString("environment") {
