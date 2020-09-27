@@ -11,7 +11,7 @@ import (
 	"github.com/tdewolff/minify"
 	"github.com/tdewolff/minify/css"
 	"github.com/tdewolff/minify/html"
-	"github.com/tullo/imgasm.com/templates/tmpl"
+	"github.com/tullo/imgasm.com/ui/templates/tmpl"
 )
 
 var tmpls map[string]*template.Template = make(map[string]*template.Template)

@@ -10,7 +10,7 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/packago/config"
 	"github.com/tullo/imgasm.com/file"
-	"github.com/tullo/imgasm.com/templates"
+	"github.com/tullo/imgasm.com/ui/templates"
 	"github.com/ulule/limiter/v3"
 	"github.com/ulule/limiter/v3/drivers/middleware/stdlib"
 	"github.com/ulule/limiter/v3/drivers/store/memory"

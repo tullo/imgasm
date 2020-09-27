@@ -19,7 +19,7 @@ import (
 	"github.com/tullo/imgasm.com/backblaze"
 	"github.com/tullo/imgasm.com/db"
 	"github.com/tullo/imgasm.com/models"
-	"github.com/tullo/imgasm.com/templates"
+	"github.com/tullo/imgasm.com/ui/templates"
 )
 
 const maxFileSize int64 = 1024 * 1024 * 10 // 10 MB
