@@ -302,6 +302,9 @@ func (f *File) Reload() (err error) {
 			}
 			return err
 		}
+		if f.options.ShortCircuit {
+			return nil
+		}
 	}
 	return nil
 }
@@ -454,6 +457,8 @@ func (f *File) writeToBuffer(indent string) (*bytes.Buffer, error) {
 					val = `"""` + val + `"""`
 				} else if !f.options.IgnoreInlineComment && strings.ContainsAny(val, "#;") {
 					val = "`" + val + "`"
+				} else if len(strings.TrimSpace(val)) != len(val) {
+					val = `"` + val + `"`
 				}
 				if _, err := buf.WriteString(equalSign + val + LineBreak); err != nil {
 					return nil, err

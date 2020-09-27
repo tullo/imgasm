@@ -154,6 +154,11 @@ func (i *Image) Rotate(a Angle) ([]byte, error) {
 	return i.Process(options)
 }
 
+// AutoRotate automatically rotates the image with no additional transformation based on the EXIF oritentation metadata, if available.
+func (i *Image) AutoRotate() ([]byte, error) {
+	return i.Process(Options{autoRotateOnly: true})
+}
+
 // Flip flips the image about the vertical Y axis.
 func (i *Image) Flip() ([]byte, error) {
 	options := Options{Flip: true}
@@ -185,6 +190,12 @@ func (i *Image) Trim() ([]byte, error) {
 	return i.Process(options)
 }
 
+// Gamma returns the gamma filtered image buffer.
+func (i *Image) Gamma(exponent float64) ([]byte, error) {
+	options := Options{Gamma: exponent}
+	return i.Process(options)
+}
+
 // Process processes the image based on the given transformation options,
 // talking with libvips bindings accordingly and returning the resultant
 // image buffer.
@@ -203,7 +214,7 @@ func (i *Image) Metadata() (ImageMetadata, error) {
 }
 
 // Interpretation gets the image interpretation type.
-// See: https://jcupitt.github.io/libvips/API/current/VipsImage.html#VipsInterpretation
+// See: https://libvips.github.io/libvips/API/current/VipsImage.html#VipsInterpretation
 func (i *Image) Interpretation() (Interpretation, error) {
 	return ImageInterpretation(i.buffer)
 }

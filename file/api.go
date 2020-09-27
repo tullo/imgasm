@@ -10,7 +10,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/dgraph-io/badger"
+	"github.com/dgraph-io/badger/v2"
 	"github.com/go-chi/chi"
 	"github.com/h2non/bimg"
 	"github.com/h2non/filetype"

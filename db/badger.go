@@ -2,7 +2,7 @@ package db
 
 import (
 	"github.com/danskeren/database/kv"
-	"github.com/dgraph-io/badger"
+	"github.com/dgraph-io/badger/v2"
 )
 
 var BadgerDB kv.KV

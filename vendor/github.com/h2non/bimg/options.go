@@ -8,7 +8,7 @@ import "C"
 
 const (
 	// Quality defines the default JPEG quality to be used.
-	Quality = 80
+	Quality = 75
 	// MaxSize defines the maximum pixels width or height supported.
 	MaxSize = 16383
 )
@@ -89,7 +89,7 @@ const (
 )
 
 // Interpretation represents the image interpretation type.
-// See: https://jcupitt.github.io/libvips/API/current/VipsImage.html#VipsInterpretation
+// See: https://libvips.github.io/libvips/API/current/VipsImage.html#VipsInterpretation
 type Interpretation int
 
 const (
@@ -119,7 +119,7 @@ const (
 
 // Extend represents the image extend mode, used when the edges
 // of an image are extended, you can specify how you want the extension done.
-// See: https://jcupitt.github.io/libvips/API/current/libvips-conversion.html#VIPS-EXTEND-BACKGROUND:CAPS
+// See: https://libvips.github.io/libvips/API/current/libvips-conversion.html#VIPS-EXTEND-BACKGROUND:CAPS
 type Extend int
 
 const (
@@ -222,5 +222,11 @@ type Options struct {
 	GaussianBlur   GaussianBlur
 	Sharpen        Sharpen
 	Threshold      float64
+	Gamma          float64
 	OutputICC      string
+	InputICC       string
+	Palette        bool
+
+	// private fields
+	autoRotateOnly bool
 }

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"math"
 
-	"github.com/dgraph-io/badger"
+	"github.com/dgraph-io/badger/v2"
 	"github.com/packago/generate"
 	"github.com/tullo/imgasm.com/db"
 	"github.com/tullo/imgasm.com/models"
