@@ -1,4 +1,4 @@
-module github.com/tullo/imgasm.com
+module github.com/tullo/imgasm
 
 go 1.15
 

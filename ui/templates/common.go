@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/csrf"
 	"github.com/packago/config"
 	"github.com/tullo/cookie"
-	"github.com/tullo/imgasm.com/db"
+	"github.com/tullo/imgasm/db"
 )
 
 type CommonData struct {

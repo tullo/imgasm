@@ -6,8 +6,8 @@ import (
 
 	"github.com/dgraph-io/badger/v2"
 	"github.com/packago/generate"
-	"github.com/tullo/imgasm.com/db"
-	"github.com/tullo/imgasm.com/models"
+	"github.com/tullo/imgasm/db"
+	"github.com/tullo/imgasm/models"
 )
 
 func calculateFitDimension(imageWidth, imageHeight, fitWidth, fitHeight int) (int, int) {

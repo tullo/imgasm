@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/packago/config"
-	"github.com/tullo/imgasm.com/models"
+	"github.com/tullo/imgasm/models"
 )
 
 // Upload a file to a bucket in backblaze cloude storrage.

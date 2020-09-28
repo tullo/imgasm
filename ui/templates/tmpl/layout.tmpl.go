@@ -7,7 +7,7 @@ const LayoutHTML = `
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if .Common.MetaTitle }}{{ .Common.MetaTitle }} - imgasm.com{{ else }}imgasm.com - when image sharing reaches its climax{{ end }}</title>
+  <title>{{ if .Common.MetaTitle }}{{ .Common.MetaTitle }} - imgasm{{ else }}imgasm - when image sharing reaches its climax{{ end }}</title>
   {{ if .Common.MetaDescription }}
 		<meta name="description" content="{{ .Common.MetaDescription }}">
 	{{ else }}
@@ -34,7 +34,7 @@ const LayoutHTML = `
       <div class="wrapper">
         <nav>
           <a href="/">
-            <img src="/static/images/logo.png">imgasm.com
+            <img src="/static/images/logo.png">imgasm
           </a>
         </nav>
       </div>
@@ -53,7 +53,7 @@ const LayoutHTML = `
       <footer>
         <div class="links">
           <div>
-            No tracking. No bloat. <a href="https://github.com/tullo/imgasm.com" target="_blank">Open Source</a>.
+            No tracking. No bloat. <a href="https://github.com/tullo/imgasm" target="_blank">Open Source</a>.
           </div>
           <div>
             <a href="/privacy-policy">Privacy Policy</a>

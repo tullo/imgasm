@@ -16,10 +16,10 @@ import (
 	"github.com/h2non/filetype"
 	"github.com/packago/config"
 	"github.com/tullo/cookie"
-	"github.com/tullo/imgasm.com/backblaze"
-	"github.com/tullo/imgasm.com/db"
-	"github.com/tullo/imgasm.com/models"
-	"github.com/tullo/imgasm.com/ui/templates"
+	"github.com/tullo/imgasm/backblaze"
+	"github.com/tullo/imgasm/db"
+	"github.com/tullo/imgasm/models"
+	"github.com/tullo/imgasm/ui/templates"
 )
 
 const maxFileSize int64 = 1024 * 1024 * 10 // 10 MB
