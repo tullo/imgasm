@@ -11,9 +11,14 @@ up:
 down:
 	@docker-compose down --remove-orphans
 
+deps-upgrade:
+	@go get -u -t -d -v ./...
+	@go mod tidy
+	@go mod vendor
+
 check:
 	$(shell go env GOPATH)/bin/staticcheck -go 1.15 \
-		-tests ./backblaze/... ./db/... ./file/... ./models/... ./templates/...
+		-tests ./backblaze/... ./db/... ./file/... ./models/... ./ui/templates/...
 
 .PHONY: clone
 clone:
