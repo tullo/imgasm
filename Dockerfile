@@ -1,9 +1,12 @@
 FROM golang:1.16.0-alpine3.13 AS go-builder
 ENV CGO_ENABLED 1
 RUN apk --no-cache add gcc musl-dev vips-dev
+RUN go install honnef.co/go/tools/cmd/staticcheck@v0.1.2
 RUN mkdir /build
 WORKDIR /build
 COPY . .
+RUN staticcheck -go 1.16 \
+		-tests ./backblaze/... ./db/... ./file/... ./models/... ./ui/templates/...
 WORKDIR /build/app/imgasm
 RUN go build -mod=vendor
 
