@@ -29,9 +29,7 @@ require (
 	github.com/tdewolff/test v1.0.6 // indirect
 	github.com/tullo/cookie v1.0.1
 	github.com/ulule/limiter/v3 v3.8.0
-	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
-	golang.org/x/sys v0.1.0 // indirect
-	golang.org/x/text v0.3.5 // indirect
+	golang.org/x/net v0.17.0 // indirect
 	gopkg.in/ini.v1 v1.62.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
