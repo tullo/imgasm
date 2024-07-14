@@ -1,6 +1,6 @@
 module github.com/tullo/imgasm
 
-go 1.15
+go 1.22
 
 require (
 	github.com/DataDog/zstd v1.4.8 // indirect
